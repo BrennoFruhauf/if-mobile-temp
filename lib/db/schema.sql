@@ -1,0 +1,24 @@
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE transaction_type (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  isGain BOOLEAN NOT NULL,
+  description TEXT NOT NULL UNIQUE,
+  icon TEXT
+);
+
+CREATE TABLE transaction (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userId INTEGER NOT NULL,
+  typeId INTEGER NOT NULL,
+  description TEXT,
+  value REAL NOT NULL,
+  date TEXT NOT NULL,
+  FOREIGN KEY (userId) REFERENCES user (id),
+  FOREIGN KEY (typeId) REFERENCES transaction_type (id)
+);
